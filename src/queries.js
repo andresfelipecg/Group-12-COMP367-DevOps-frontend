@@ -12,6 +12,18 @@ export const GET_COURSES = gql`
   }
 `;
 
+export const GET_COURSE_BY_ID = gql`
+  query($id: ID!) {
+    course(id: $id) {
+      id
+      code
+      name
+      section
+      semester
+    }
+  }
+`;
+
 export const ADD_COURSE = gql`
   mutation addCourse($code: String!, $name: String!, $section: String!, $semester: String!) {
     addCourse(code: $code, name: $name, section: $section, semester: $semester) {
