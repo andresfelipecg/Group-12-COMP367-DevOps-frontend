@@ -37,7 +37,7 @@
   }
 }
 body {
-  background: linear-gradient(rgb(255, 183, 225), rgb(255, 162, 175));
+  background: linear-gradient(rgb(255, 183, 225), rgb(254, 162, 175));
   color: white;
   font-weight: bold;
   padding: 10px;
