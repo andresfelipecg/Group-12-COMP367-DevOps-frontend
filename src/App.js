@@ -13,7 +13,17 @@ const GET_COURSES = gql`
     }
   }
 `;
-
+const GET_COURSES_BY_ID = gql`
+query($id: ID!) {
+  course(id: $id) {
+    id
+    code
+    name
+    section
+    semester
+  }
+}
+`;
 const DELETE_COURSE = gql`
   mutation deleteCourse($_id: String!) {
     deleteCourse(_id: $_id) {
