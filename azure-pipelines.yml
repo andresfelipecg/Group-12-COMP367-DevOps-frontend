@@ -27,10 +27,3 @@ stages:
     - script: |
         npm test -- --coverage
       displayName: 'Test project and generate code coverage report'
-
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)'
-        ArtifactName: 'Coverage Report'
-        publishLocation: 'Container'
-      condition: succeededOrFailed()
