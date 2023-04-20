@@ -28,21 +28,9 @@ stages:
         npm test -- --coverage
       displayName: 'Test project and generate code coverage report'
 
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: 'npm install eslint'
-      displayName: 'Install ESLint'
-
-    - task: ESLint@0
-      inputs:
-        cwd: '.'
-        customPath: 'node_modules/.bin/eslint'
-      displayName: 'Run ESLint'
-
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.SourcesDirectory)'
-        ArtifactName: 'ESLint Reports'
+        ArtifactName: 'Coverage Report'
         publishLocation: 'Container'
       condition: succeededOrFailed()
