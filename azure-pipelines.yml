@@ -9,13 +9,40 @@ trigger:
 pool:
   name: 'Self-Hosted-Agent-Lab4'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    - script: |
+        npm install
+        npm run build
+      displayName: 'Compile project'
+
+    - script: |
+        npm test -- --coverage
+      displayName: 'Test project and generate code coverage report'
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'npm install eslint'
+      displayName: 'Install ESLint'
+
+    - task: ESLint@0
+      inputs:
+        cwd: '.'
+        customPath: 'node_modules/.bin/eslint'
+      displayName: 'Run ESLint'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'ESLint Reports'
+        publishLocation: 'Container'
+      condition: succeededOrFailed()
