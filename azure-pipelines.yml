@@ -24,10 +24,6 @@ stages:
         npm run build
       displayName: 'Compile project'
 
-    - script: |
-        npm test -- --coverage
-      displayName: 'Test project and generate code coverage report'
-
     #- script: |
     #    npm test -- --coverage
     #  displayName: 'Test project and generate code coverage report'
