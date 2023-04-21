@@ -24,6 +24,24 @@ stages:
         npm run build
       displayName: 'Compile project'
 
+    - script: |
+        npm test -- --coverage
+      displayName: 'Test project and generate code coverage report'
+
     #- script: |
     #    npm test -- --coverage
     #  displayName: 'Test project and generate code coverage report'
+
+- stage: Deliver
+  displayName: 'Deliver Artifact'
+  dependsOn: Build
+  jobs:
+  - job: Deliver_Artifact
+    displayName: 'Deliver Artifact'
+    steps:
+    - download: current
+      artifact: drop
+      displayName: 'Download Artifact'
+    - script: |
+        echo "Deliver artifact using build tool"
+      displayName: 'Deliver Artifact'
