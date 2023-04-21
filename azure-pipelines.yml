@@ -31,7 +31,7 @@ stages:
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact'
       inputs:
-       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+       PathtoPublish: '/Users/andre/Documents/DevOps/'
        ArtifactName: 'DevOps-Group12'
 
 - stage: Deliver
