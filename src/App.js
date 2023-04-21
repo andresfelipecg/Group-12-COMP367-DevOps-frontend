@@ -56,6 +56,18 @@ const UPDATE_COURSE = gql`
   }
 `;
 
+const GET_COURSES_BY_SEMESTER = gql`
+  query getCoursesBySemester($semester: String!) {
+    courses(where: { semester: $semester }) {
+      _id
+      code
+      name
+      section
+      semester
+    }
+  }
+`;
+
 function App() {
   const { loading, error, data } = useQuery(GET_COURSES);
   const [deleteCourse] = useMutation(DELETE_COURSE);
