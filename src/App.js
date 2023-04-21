@@ -44,7 +44,7 @@ const ADD_COURSE = gql`
   }
 `;
 
-const UPDATE_COURSE = gql`
+const UPDATE_COURSE_2 = gql`
   mutation updateCourse($_id: String!, $code: String!, $name: String!, $section: String!, $semester: String!) {
     updateCourse(_id: $_id, code: $code, name: $name, section: $section, semester: $semester) {
       _id
@@ -56,7 +56,7 @@ const UPDATE_COURSE = gql`
   }
 `;
 
-const GET_COURSES_BY_SEMESTER = gql`
+const GET_COURSES_BY_SEMESTER_2 = gql`
   query getCoursesBySemester($semester: String!) {
     courses(where: { semester: $semester }) {
       _id
