@@ -34,7 +34,6 @@ stages:
        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
        ArtifactName: 'DevOps-Group12'
 
-
 - stage: Deliver
   displayName: 'Deliver Artifact'
   dependsOn: Build
@@ -48,3 +47,47 @@ stages:
     - script: |
         echo "Deliver artifact using build tool"
       displayName: 'Deliver Artifact'
+
+- stage: DeployToDev
+  displayName: 'Deploy to Dev Env'
+  dependsOn: Deliver
+  jobs:
+  - job: DeployToDevJob
+    displayName: 'Deploy to Dev Env'
+    steps:
+    - script: |
+        echo "Deploying artifact to Dev Env"
+      displayName: 'Deploy Artifact to Dev Env'
+
+- stage: DeployToQAT
+  displayName: 'Deploy to QAT Env'
+  dependsOn: DeployToDev
+  jobs:
+  - job: DeployToQATJob
+    displayName: 'Deploy to QAT Env'
+    steps:
+    - script: |
+        echo "Deploying artifact to QAT Env"
+      displayName: 'Deploy Artifact to QAT Env'
+
+- stage: DeployToStaging
+  displayName: 'Deploy to Staging Env'
+  dependsOn: DeployToQAT
+  jobs:
+  - job: DeployToStagingJob
+    displayName: 'Deploy to Staging Env'
+    steps:
+    - script: |
+        echo "Deploying artifact to Staging Env"
+      displayName: 'Deploy Artifact to Staging Env'
+
+- stage: DeployToProduction
+  displayName: 'Deploy to Production Env'
+  dependsOn: DeployToStaging
+  jobs:
+  - job: DeployToProductionJob
+    displayName: 'Deploy to Production Env'
+    steps:
+    - script: |
+        echo "Deploying artifact to Production Env"
+      displayName: 'Deploy Artifact to Production Env'
